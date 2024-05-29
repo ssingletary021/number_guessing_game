@@ -28,11 +28,14 @@ SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 # Initialize the number of guesses
 NUMBER_OF_GUESSES=0
 
+# Prompt for a guess
+echo -n "Guess the secret number between 1 and 1000:"
+
 # Game loop
 while true; do
 
  # Prompt for a guess
- read -p "Guess the secret number between 1 and 1000:" USER_GUESS
+ read USER_GUESS
 
 # Increment the number of guesses
 ((NUMBER_OF_GUESSES++))
