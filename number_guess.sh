@@ -60,7 +60,7 @@ fi
 done
 # add to database as games_played
 USER_ID=$($PSQL "SELECT user_id FROM users WHERE username = '$USERNAME'")
-INSERT_GAME_ATTEMPT=$($PSQL "INSERT INTO games(user_id, number_of_guesses) VALUES($USER_ID, $NUMBER_OF_GUESSES)")
+INSERT_GAME_ATTEMPT=$($PSQL "INSERT INTO games(game_id, user_id, number_of_guesses) VALUES(DEFAULT, $USER_ID, $NUMBER_OF_GUESSES)")
 
 # must tally guesses to be added to database as number_of_guesses
 
