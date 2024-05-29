@@ -21,21 +21,14 @@ else
   BEST_GAME=$($PSQL "SELECT best_game FROM game WHERE username = '$USERNAME'")
   echo -e "\nWelcome back, $USERNAME_INPUT! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 fi
-#random number generation
-
-# prompt for guess
-
-# if guess is higher than secret number
-
-# prompt for guess
-
-# if guess is lower than secret number
-
-# prompt for new guess
-
-# if input is not an integer
-
-# when guess is right
+# RANDOM NUMBER GENERATION
+# Generate a random number between 1 and 1000
+# Initialize the number of guesses
+# Game loop
+ # Prompt for a guess
+# Increment the number of guesses
+# Check if the input is an integer
+# Check if the guess is correct
 
 # add to database as games_played
 
