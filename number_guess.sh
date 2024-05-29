@@ -7,18 +7,18 @@ read USERNAME
 
 
 # check if new username
-USERNAME_INPUT=$($PSQL "SELECT username FROM game WHERE username = '$USERNAME'")
+USERNAME_INPUT=$($PSQL "SELECT username FROM users WHERE username = '$USERNAME'")
 
 # if new, add to database
 if [[ -z $USERNAME_INPUT ]]
 then
   echo -e "\nWelcome, $USERNAME! It looks like this is your first time here.\n"
-  INSERT_USERNAME=$($PSQL "INSERT INTO game(username) VALUES('$USERNAME')")
+  INSERT_USERNAME=$($PSQL "INSERT INTO users(username) VALUES('$USERNAME')")
 
 # if not new
 else
-  GAMES_PLAYED=$($PSQL "SELECT games_played FROM game WHERE username = '$USERNAME'")
-  BEST_GAME=$($PSQL "SELECT best_game FROM game WHERE username = '$USERNAME'")
+  GAMES_PLAYED=$($PSQL "SELECT count(*) FROM games JOIN users ON games.user_id = users.user_id WHERE username = '$USERNAME'")
+  BEST_GAME=$($PSQL "SELECT MIN(number_of_guesses) FROM games JOIN users ON games.user_id = users.user_id where username = '$USERNAME'")
   echo -e "\nWelcome back, $USERNAME_INPUT! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 fi
 # RANDOM NUMBER GENERATION
