@@ -57,10 +57,13 @@ elif [[ $USER_GUESS -lt $SECRET_NUMBER ]]
 then
   echo "It's higher than that, guess again:"
 fi
+done
 # add to database as games_played
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE username = '$USERNAME'")
+INSERT_GAME_ATTEMPT=$($PSQL "INSERT INTO games(user_id, number_of_guesses) VALUES($USER_ID, $NUMBER_OF_GUESSES)")
 
 # must tally guesses to be added to database as number_of_guesses
 
 # best_game = least guesses
-done
+
 exit
