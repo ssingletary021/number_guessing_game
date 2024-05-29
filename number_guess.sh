@@ -23,16 +23,44 @@ else
 fi
 # RANDOM NUMBER GENERATION
 # Generate a random number between 1 and 1000
-# Initialize the number of guesses
-# Game loop
- # Prompt for a guess
-# Increment the number of guesses
-# Check if the input is an integer
-# Check if the guess is correct
+SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 
+# Initialize the number of guesses
+NUMBER_OF_GUESSES=0
+
+# Game loop
+while true; do
+
+ # Prompt for a guess
+ read -p "Guess the secret number between 1 and 1000:" USER_GUESS
+
+# Increment the number of guesses
+((NUMBER_OF_GUESSES++))
+
+# Check if the input is an integer
+if ! [[ $USER_GUESS =~ ^[0-9]+$ ]]
+then
+  echo "That is not an integer, guess again:"
+  continue
+fi
+
+# Check if the guess is correct
+if [[ $USER_GUESS -eq $SECRET_NUMBER ]]
+then
+  echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
+  break
+
+elif [[ $USER_GUESS -gt $SECRET_NUMBER ]]
+then 
+  echo "It's lower than that, guess again:"
+elif [[ $USER_GUESS -lt $SECRET_NUMBER ]]
+then
+  echo "It's higher than that, guess again:"
+fi
 # add to database as games_played
 
 # must tally guesses to be added to database as number_of_guesses
 
 # best_game = least guesses
+done
 exit
